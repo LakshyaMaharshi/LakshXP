@@ -6,7 +6,8 @@ const Footer = () => {
     <footer className="bg-gray-50 border-t py-8 mt-12">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          {/* Main CTA */}
+
+
           <div className="mb-6 p-4 bg-white rounded-lg shadow-sm inline-flex items-center">
             <Rocket className="text-purple-600 mr-2" size={20} />
             <p className="text-gray-700 font-medium">
@@ -23,7 +24,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Social Links */}
+  
           <div className="flex justify-center space-x-6 mb-6">
             <a
               href="https://github.com/LakshXP"
@@ -47,7 +48,7 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Copyright */}
+     
           <div className="text-sm text-gray-500 flex items-center justify-center">
             <Copyright className="mr-1" size={14} />
             <span>{new Date().getFullYear()} LakshXP. All rights reserved.</span>

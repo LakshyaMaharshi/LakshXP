@@ -1,4 +1,4 @@
-// src/components/SignUp.jsx
+
 import { SignUp } from '@clerk/clerk-react';
 
 const SignUpPage = () => {

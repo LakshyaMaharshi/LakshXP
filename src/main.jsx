@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
 import { store } from './store/store';
 import App from './App';
@@ -16,9 +16,9 @@ root.render(
   <StrictMode>
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter >
           <App />
-        </BrowserRouter>
+        </HashRouter >
       </Provider>
     </ClerkProvider>
   </StrictMode>

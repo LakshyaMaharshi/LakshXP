@@ -7,7 +7,7 @@ export const store = configureStore({
   },
 });
 
-// Optional type-like documentation for better IDE support
+
 /**
  * @typedef {ReturnType<typeof store.getState>} RootState
  * @typedef {typeof store.dispatch} AppDispatch

@@ -24,7 +24,6 @@ const GameCard = ({ game }) => {
       className="relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group"
       onClick={handleCardClick}
     >
-      {/* Favorite Button */}
       <button 
         onClick={handleFavoriteClick}
         className="absolute top-3 right-3 z-10 p-2 bg-white/80 rounded-full backdrop-blur-sm shadow-sm transition-all hover:scale-110 focus:outline-none"
@@ -36,7 +35,6 @@ const GameCard = ({ game }) => {
         />
       </button>
 
-      {/* Game Image */}
       <div className="relative h-48 overflow-hidden">
         {game.background_image ? (
           <img 
@@ -53,11 +51,11 @@ const GameCard = ({ game }) => {
             <Gamepad2 className="h-12 w-12 text-gray-400" />
           </div>
         )}
-        {/* Gradient Overlay */}
+        
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       </div>
 
-      {/* Game Info */}
+      
       <div className="p-4">
         <h3 className="font-bold text-lg mb-2 line-clamp-2 text-gray-900">{game.name}</h3>
         

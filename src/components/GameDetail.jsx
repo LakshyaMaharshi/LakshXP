@@ -117,7 +117,6 @@ const GameDetail = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
           className="flex items-center text-blue-600 hover:text-blue-800 mb-6 transition-colors group"
@@ -126,7 +125,6 @@ const GameDetail = () => {
           <span className="font-medium">Back to Games</span>
         </button>
 
-        {/* Game Header */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
           <div className="relative h-64 md:h-96">
             <img
@@ -170,9 +168,8 @@ const GameDetail = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          {/* Tab Navigation */}
+          
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
               <button
@@ -199,7 +196,6 @@ const GameDetail = () => {
             </nav>
           </div>
 
-          {/* Tab Content */}
           <div className="p-6">
             {activeTab === 'about' && (
               <div className="space-y-6">

@@ -166,7 +166,7 @@ const Header = () => {
 
         <div className="d-flex align-items-center order-lg-2 ms-auto">
           <div className="d-flex align-items-center gap-3">
-            {/* Filter Button */}
+        
             <div className="position-relative" ref={filtersRef}>
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -266,7 +266,7 @@ const Header = () => {
               </AnimatePresence>
             </div>
 
-            {/* Search Button */}
+          
             <div className="position-relative" ref={searchRef}>
               {!showSearch ? (
                 <motion.button
@@ -324,7 +324,7 @@ const Header = () => {
               </AnimatePresence>
             </div>
 
-            {/* User Button */}
+            
             {isSignedIn ? (
               <UserButton afterSignOutUrl="/" />
             ) : (

@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_KEY = '07aa5d39090f4c97a6eb31d3a93db9d5';
 const BASE_URL = 'https://api.rawg.io/api';
 
-// Mapping constants for filters
+
 const GENRE_MAPPING = {
   'Action': 4,
   'Adventure': 3,
@@ -41,12 +41,12 @@ export const fetchGames = createAsyncThunk(
 
       let url = `${BASE_URL}/games?key=${API_KEY}&page=${page}&page_size=${pageSize}`;
       
-      // Handle search parameters
+      
       if (search) {
         url += `&search=${encodeURIComponent(search.trim())}`;
         if (filters.searchPrecise) url += '&search_precise=true';
         
-        // When searching, ignore other filters unless explicitly kept
+        
         if (!filters.keepFiltersOnSearch) {
           const response = await axios.get(url);
           return {
@@ -67,22 +67,20 @@ export const fetchGames = createAsyncThunk(
         }
       }
 
-      // Handle genre filters
+      
       if (filters.genres?.length > 0) {
         url += `&genres=${filters.genres.map(genre => GENRE_MAPPING[genre]).join(',')}`;
       }
 
-      // Handle platform filters
+    
       if (filters.platforms?.length > 0) {
         url += `&platforms=${filters.platforms.map(platform => PLATFORM_MAPPING[platform]).join(',')}`;
       }
 
-      // Handle rating filters
       if (filters.ratings?.length > 0) {
         url += `&metacritic=${RATING_MAPPING[filters.ratings[0]]}`;
       }
 
-      // Handle ordering
       if (filters.ordering) {
         url += `&ordering=${filters.ordering}`;
       }

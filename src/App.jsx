@@ -29,7 +29,7 @@ const App = () => {
 
       <Container fluid className="flex-grow-1">
         <Row className="gx-0">
-          {/* Sidebar */}
+        
           <Col
             md={3}
             lg={2}
@@ -41,7 +41,6 @@ const App = () => {
             </div>
           </Col>
 
-          {/* Main content */}
           <Col xs={12} md={9} lg={10} className="p-4">
             <Routes>
               <Route path="/" element={<GameList />} />

@@ -5,7 +5,7 @@ const MouseFollower = () => {
   const [dots, setDots] = useState([]);
   const dotSize = 6;
   const dotCount = 8;
-  const dotColor = "rgba(59, 130, 246, 0.8)"; // Blue-500 with 80% opacity
+  const dotColor = "rgba(59, 130, 246, 0.8)"; 
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -29,7 +29,6 @@ const MouseFollower = () => {
 
   return (
     <>
-      {/* Main blue dot */}
       <motion.div
         style={{
           left: cursorXSpring,
@@ -41,7 +40,6 @@ const MouseFollower = () => {
         className="fixed rounded-full pointer-events-none z-[9999]"
       />
 
-      {/* Blue dot trail */}
       {dots.map((dot, index) => {
         const opacity = 0.8 - (index / dotCount * 0.7);
         const size = dotSize * (0.9 - (index * 0.05));

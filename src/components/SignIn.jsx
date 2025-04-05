@@ -7,7 +7,7 @@ const SignInPage = () => {
       <SignIn 
         path="/sign-in"
         routing="path"
-        signUpUrl="/sign-up"  // Optional: if you want to allow sign-ups
+        signUpUrl="/sign-up"  
       />
     </div>
   );

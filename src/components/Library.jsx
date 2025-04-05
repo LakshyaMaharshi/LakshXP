@@ -22,7 +22,7 @@ const Library = () => {
             Back
           </Button>
           <h2 className="mb-0">My Game Library</h2>
-          <div style={{ width: '100px' }}></div> {/* Spacer for alignment */}
+          <div style={{ width: '100px' }}></div> 
         </div>
 
         {favorites.length === 0 ? (
