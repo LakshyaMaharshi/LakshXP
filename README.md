@@ -4,7 +4,7 @@ A React-based gaming platform powered by RAWG API with Clerk authentication, fea
 ## Live Demo (Deployed)
 **⚠️Note:- After signing in, **close the tab completely Again reopen the URL or website** Due to GitHub Pages' static hosting limitations with client-side routing** <br/>
 👉 Play Now on GitHub Pages 
-URL : https://lakshyamaharshi.github.io/LakshXP/#/
+URL : https://lakshyamaharshi.github.io/LakshXP/#/ (🙏Use after the reading the upper Note)
 
 🔐 **For GitHub Pages deployment:**  
 Due to GitHub Pages' static hosting limitations with client-side routing:
