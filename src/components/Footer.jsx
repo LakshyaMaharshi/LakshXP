@@ -13,7 +13,7 @@ const Footer = () => {
             <p className="text-gray-700 font-medium">
               Enjoying the app? Give a{' '}
               <a
-                href="https://github.com/LakshXP/your-repo-name"
+                href="https://github.com/LakshyaMaharshi/LakshXP"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center"
@@ -27,7 +27,7 @@ const Footer = () => {
   
           <div className="flex justify-center space-x-6 mb-6">
             <a
-              href="https://github.com/LakshXP"
+              href="https://github.com/LakshyaMaharshi/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-700 hover:text-gray-900 transition-colors flex items-center"
@@ -37,7 +37,7 @@ const Footer = () => {
               <span>@LakshyaMaharshi</span>
             </a>
             <a
-              href="https://github.com/LakshXP/your-repo-name"
+              href="https://github.com/LakshyaMaharshi/LakshXP"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-700 hover:text-gray-900 transition-colors flex items-center"
