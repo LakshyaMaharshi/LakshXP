@@ -12,13 +12,18 @@ const CLERK_PUBLISHABLE_KEY = "pk_test_bGVuaWVudC10cmVlZnJvZy02MS5jbGVyay5hY2Nvd
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
+
 root.render(
   <StrictMode>
-    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider 
+      publishableKey={CLERK_PUBLISHABLE_KEY}
+      routerPush={(to) => window.location.hash = `#${to}`}
+      routerReplace={(to) => window.location.replace(`#${to}`)}
+    >
       <Provider store={store}>
-        <HashRouter >
+        <HashRouter>
           <App />
-        </HashRouter >
+        </HashRouter>
       </Provider>
     </ClerkProvider>
   </StrictMode>
