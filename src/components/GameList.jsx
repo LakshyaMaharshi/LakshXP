@@ -3,111 +3,106 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchGames, setPageSize } from '../store/slices/gamesSlice';
 import GameCard from './GameCard';
 
-const GamesList = () => {
+const GameList = () => {
   const dispatch = useAppDispatch();
   const { 
-    games, 
-    loading, 
-    error, 
-    currentPage, 
-    totalPages,
-    pageSize,
-    count
+    titles, 
+    isLoading, 
+    hasError, 
+    activePage, 
+    maxPages,
+    itemsPerPage,
+    totalItems
   } = useAppSelector((state) => state.games);
 
   useEffect(() => {
-    dispatch(fetchGames({ page: currentPage, pageSize }));
-  }, [dispatch, currentPage, pageSize]);
+    dispatch(fetchGames({ page: activePage, pageSize: itemsPerPage }));
+  }, [dispatch, activePage, itemsPerPage]);
 
-  const handlePageChange = (newPage) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      dispatch(fetchGames({ page: newPage, pageSize }));
+  const switchPage = (page) => {
+    if (page >= 1 && page <= maxPages) {
+      dispatch(fetchGames({ page, pageSize: itemsPerPage }));
     }
   };
 
-  const handlePageSizeChange = (e) => {
+  const updateItemsPerPage = (e) => {
     dispatch(setPageSize(Number(e.target.value)));
   };
 
-  if (loading) return <div className="text-center py-8">Loading games...</div>;
-  if (error) return <div className="text-center py-8 text-red-500">Error: {error}</div>;
+  if (isLoading) return <div className="text-center py-10">Loading catalog...</div>;
+  if (hasError) return <div className="text-center py-10 text-red-600">Error: {hasError}</div>;
+
+  const paginationControls = () => {
+    const buttons = [];
+    const displayCount = Math.min(5, maxPages);
+    const start = activePage <= 3 ? 1 : activePage > maxPages - 3 ? maxPages - 4 : activePage - 2;
+
+    for (let i = 0; i < displayCount; i++) {
+      const page = start + i;
+      buttons.push(
+        <button
+          key={page}
+          onClick={() => switchPage(page)}
+          className={`px-3 py-1 border ${activePage === page ? 'bg-indigo-600 text-white' : 'bg-white'}`}
+        >
+          {page}
+        </button>
+      );
+    }
+    return buttons;
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Game Library ({count} games)</h1>
-        <div className="flex items-center space-x-4">
-          <select 
-            value={pageSize}
-            onChange={handlePageSizeChange}
-            className="border rounded px-3 py-1"
-          >
-            <option value={10}>10 per page</option>
-            <option value={20}>20 per page</option>
-            <option value={50}>50 per page</option>
-          </select>
-        </div>
+    <div className="max-w-7xl mx-auto px-5 py-10">
+      <div className="flex justify-between items-center mb-5">
+        <h1 className="text-3xl font-semibold">Game Catalog ({totalItems} items)</h1>
+        <select
+          value={itemsPerPage}
+          onChange={updateItemsPerPage}
+          className="border rounded-lg px-3 py-1 bg-white"
+        >
+          <option value={10}>10 items</option>
+          <option value={20}>20 items</option>
+          <option value={50}>50 items</option>
+        </select>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {titles.map((title) => (
+          <GameCard key={title.id} game={title} />
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-8 space-x-2">
+      {maxPages > 1 && (
+        <div className="flex justify-center gap-2 mt-6">
           <button
-            onClick={() => handlePageChange(1)}
-            disabled={currentPage === 1}
-            className="px-4 py-2 border rounded disabled:opacity-50"
+            onClick={() => switchPage(1)}
+            disabled={activePage === 1}
+            className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
-            «
+            First
           </button>
           <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-4 py-2 border rounded disabled:opacity-50"
+            onClick={() => switchPage(activePage - 1)}
+            disabled={activePage === 1}
+            className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
-            ‹
+            Prev
           </button>
-          
-          {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-            let pageNum;
-            if (totalPages <= 5) {
-              pageNum = i + 1;
-            } else if (currentPage <= 3) {
-              pageNum = i + 1;
-            } else if (currentPage >= totalPages - 2) {
-              pageNum = totalPages - 4 + i;
-            } else {
-              pageNum = currentPage - 2 + i;
-            }
-            
-            return (
-              <button
-                key={pageNum}
-                onClick={() => handlePageChange(pageNum)}
-                className={`px-4 py-2 border rounded ${currentPage === pageNum ? 'bg-blue-500 text-white' : ''}`}
-              >
-                {pageNum}
-              </button>
-            );
-          })}
-
+          {paginationControls()}
           <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 border rounded disabled:opacity-50"
+            onClick={() => switchPage(activePage + 1)}
+            disabled={activePage === maxPages}
+            className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
-            ›
+            Next
           </button>
           <button
-            onClick={() => handlePageChange(totalPages)}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 border rounded disabled:opacity-50"
+            onClick={() => switchPage(maxPages)}
+            disabled={activePage === maxPages}
+            className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
-            »
+            Last
           </button>
         </div>
       )}
@@ -115,4 +110,4 @@ const GamesList = () => {
   );
 };
 
-export default GamesList;
+export default GameList;

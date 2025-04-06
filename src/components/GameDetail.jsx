@@ -24,7 +24,6 @@ const GameDetail = () => {
     const fetchGameData = async () => {
       try {
         setLoading(true);
-        
         const [gameResponse, screenshotsResponse] = await Promise.all([
           axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`),
           axios.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`)
@@ -131,10 +130,7 @@ const GameDetail = () => {
               src={game.background_image || '/placeholder-game.jpg'}
               alt={game.name}
               className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/placeholder-game.jpg';
-              }}
+              onError={(e) => e.target.src = '/placeholder-game.jpg'}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -169,7 +165,6 @@ const GameDetail = () => {
         </div>
 
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
               <button
@@ -209,7 +204,6 @@ const GameDetail = () => {
                     dangerouslySetInnerHTML={{ __html: game.description || 'No description available.' }}
                   />
                 </div>
-                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold mb-3 flex items-center">
@@ -228,7 +222,6 @@ const GameDetail = () => {
                       )}
                     </div>
                   </div>
-                  
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold mb-3 flex items-center">
                       <Calendar className="mr-2 text-blue-500" size={18} />
