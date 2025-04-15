@@ -6,22 +6,22 @@ import GameCard from './GameCard';
 const GameList = () => {
   const dispatch = useAppDispatch();
   const { 
-    titles, 
-    isLoading, 
-    hasError, 
-    activePage, 
-    maxPages,
-    itemsPerPage,
-    totalItems
+    games, 
+    loading, 
+    error, 
+    currentPage, 
+    totalPages,  
+    pageSize,    
+    count        
   } = useAppSelector((state) => state.games);
 
   useEffect(() => {
-    dispatch(fetchGames({ page: activePage, pageSize: itemsPerPage }));
-  }, [dispatch, activePage, itemsPerPage]);
+    dispatch(fetchGames({ page: currentPage, pageSize }));
+  }, [dispatch, currentPage, pageSize]);
 
   const switchPage = (page) => {
-    if (page >= 1 && page <= maxPages) {
-      dispatch(fetchGames({ page, pageSize: itemsPerPage }));
+    if (page >= 1 && page <= totalPages) {
+      dispatch(fetchGames({ page, pageSize }));
     }
   };
 
@@ -29,13 +29,13 @@ const GameList = () => {
     dispatch(setPageSize(Number(e.target.value)));
   };
 
-  if (isLoading) return <div className="text-center py-10">Loading catalog...</div>;
-  if (hasError) return <div className="text-center py-10 text-red-600">Error: {hasError}</div>;
+  if (loading) return <div className="text-center py-10">Loading catalog...</div>;
+  if (error) return <div className="text-center py-10 text-red-600">Error: {error}</div>;
 
   const paginationControls = () => {
     const buttons = [];
-    const displayCount = Math.min(5, maxPages);
-    const start = activePage <= 3 ? 1 : activePage > maxPages - 3 ? maxPages - 4 : activePage - 2;
+    const displayCount = Math.min(5, totalPages);
+    const start = currentPage <= 3 ? 1 : currentPage > totalPages - 3 ? totalPages - 4 : currentPage - 2;
 
     for (let i = 0; i < displayCount; i++) {
       const page = start + i;
@@ -43,7 +43,7 @@ const GameList = () => {
         <button
           key={page}
           onClick={() => switchPage(page)}
-          className={`px-3 py-1 border ${activePage === page ? 'bg-indigo-600 text-white' : 'bg-white'}`}
+          className={`px-3 py-1 border ${currentPage === page ? 'bg-indigo-600 text-white' : 'bg-white'}`}
         >
           {page}
         </button>
@@ -55,9 +55,9 @@ const GameList = () => {
   return (
     <div className="max-w-7xl mx-auto px-5 py-10">
       <div className="flex justify-between items-center mb-5">
-        <h1 className="text-3xl font-semibold">Game Catalog ({totalItems} items)</h1>
+        <h1 className="text-3xl font-semibold">Game Catalog ({count} items)</h1>
         <select
-          value={itemsPerPage}
+          value={pageSize}
           onChange={updateItemsPerPage}
           className="border rounded-lg px-3 py-1 bg-white"
         >
@@ -68,38 +68,38 @@ const GameList = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {titles.map((title) => (
-          <GameCard key={title.id} game={title} />
+        {(games || []).map((game) => (
+          <GameCard key={game.id} game={game} />
         ))}
       </div>
 
-      {maxPages > 1 && (
+      {totalPages > 1 && (
         <div className="flex justify-center gap-2 mt-6">
           <button
             onClick={() => switchPage(1)}
-            disabled={activePage === 1}
+            disabled={currentPage === 1}
             className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
             First
           </button>
           <button
-            onClick={() => switchPage(activePage - 1)}
-            disabled={activePage === 1}
+            onClick={() => switchPage(currentPage - 1)}
+            disabled={currentPage === 1}
             className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
             Prev
           </button>
           {paginationControls()}
           <button
-            onClick={() => switchPage(activePage + 1)}
-            disabled={activePage === maxPages}
+            onClick={() => switchPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
             className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
             Next
           </button>
           <button
-            onClick={() => switchPage(maxPages)}
-            disabled={activePage === maxPages}
+            onClick={() => switchPage(totalPages)}
+            disabled={currentPage === totalPages}
             className="px-3 py-1 border rounded-lg disabled:opacity-40"
           >
             Last

@@ -6,9 +6,3 @@ export const store = configureStore({
     games: gamesReducer,
   },
 });
-
-
-/**
- * @typedef {ReturnType<typeof store.getState>} RootState
- * @typedef {typeof store.dispatch} AppDispatch
- */
